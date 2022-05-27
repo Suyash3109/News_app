@@ -1,0 +1,8 @@
+Column(
+                      children: [
+                        Text(streamSnapshot.data!.docs[index]['email']),
+                        Text(streamSnapshot.data!.docs[index]['firstname']),
+                        Text(streamSnapshot.data!.docs[index]['secondname']),
+                      ],
+                    )
+                    
