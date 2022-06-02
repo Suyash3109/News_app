@@ -33,9 +33,11 @@ class _homescrState extends State<homescr> {
         .child('userpic')
         .getDownloadURL();
     if (imageurl == null) {
-      setState(() {
-        imageurl = downloadurl;
-      });
+      if (mounted) {
+        setState(() {
+          imageurl = downloadurl;
+        });
+      }
     }
   }
 
@@ -43,19 +45,19 @@ class _homescrState extends State<homescr> {
   Widget build(BuildContext context) {
     final logoutbutton = Material(
       elevation: 5,
-      borderRadius: BorderRadius.all(Radius.circular(50)),
+      borderRadius: const BorderRadius.all(const Radius.circular(50)),
       color: Colors.redAccent,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(50, 15, 50, 15),
+        padding: const EdgeInsets.fromLTRB(50, 15, 50, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => loginpage()));
+              MaterialPageRoute(builder: (context) => const loginpage()));
         },
-        child: Text(
+        child: const Text(
           "logout",
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.black38,
             fontWeight: FontWeight.bold,
@@ -70,9 +72,9 @@ class _homescrState extends State<homescr> {
               onPressed: () {
                 _signout();
               },
-              icon: Icon(Icons.login_outlined))
+              icon: const Icon(Icons.login_outlined))
         ],
-        title: Text("Home page"),
+        title: const Text("Home page"),
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance.collection('users').snapshots(),
@@ -93,14 +95,14 @@ class _homescrState extends State<homescr> {
                                 streamSnapshot.data!.docs[index]['secondname']
                                     .toString()
                                     .toUpperCase(),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle:
                               Text(streamSnapshot.data!.docs[index]['email']),
                           leading: InkWell(
                             onTap: () => _showDialog(context),
                             // Navigator.of(context).restorablePush(_dialog),
-                            child: CircleAvatar(
+                            child: const CircleAvatar(
                               child: CircularProgressIndicator(),
                               // backgroundImage: NetworkImage(imageurl!),
                             ),
@@ -108,24 +110,24 @@ class _homescrState extends State<homescr> {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => edit(
-                                                streamSnapshot.data!.docs[index]
-                                                    ['uid'],
-                                                streamSnapshot.data!.docs[index]
-                                                    ['firstname'],
-                                                streamSnapshot.data!.docs[index]
-                                                    ['email'],
-                                                streamSnapshot.data!.docs[index]
-                                                    ['secondname'],
-                                              )));
-                                },
-                              )
+                              // IconButton(
+                              //   icon: const Icon(Icons.edit),
+                              //   onPressed: () {
+                              //     Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //             builder: (_) => edit(
+                              //                   streamSnapshot.data!.docs[index]
+                              //                       ['uid'],
+                              //                   streamSnapshot.data!.docs[index]
+                              //                       ['firstname'],
+                              //                   streamSnapshot.data!.docs[index]
+                              //                       ['email'],
+                              //                   streamSnapshot.data!.docs[index]
+                              //                       ['secondname'],
+                              //                 )));
+                              //   },
+                              // )
                             ],
                           ),
                         ),
@@ -137,9 +139,9 @@ class _homescrState extends State<homescr> {
               );
             } else if (streamSnapshot.connectionState ==
                 ConnectionState.waiting) {
-              CircularProgressIndicator();
+              const CircularProgressIndicator();
             }
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }),
       //  floatingActionButtonLocation: FloatingActionButton.extended(onPressed: logoutbutton, label: 'log')
     );
@@ -167,7 +169,7 @@ class _homescrState extends State<homescr> {
                 Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
                       // padding: EdgeInsets.symmetric(
                       //     horizontal: MediaQuery.of(context).size.width - 200,
                       //     vertical: MediaQuery.of(context).size.height - 585),
@@ -175,7 +177,7 @@ class _homescrState extends State<homescr> {
                       //   image: DecorationImage(image: NetworkImage(imageurl!)
                       //   ),
                       // ),
-                      child: Text('Test'),
+                      child: const Text('Test'),
                     ),
                   ],
                 ),
@@ -196,7 +198,7 @@ class _homescrState extends State<homescr> {
   //     });
   Future _signout() async {
     await FirebaseAuth.instance.signOut();
-    return Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => loginpage()));
+    return Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const loginpage()));
   }
 }

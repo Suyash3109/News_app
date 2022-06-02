@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
@@ -13,21 +14,34 @@ class edit extends StatefulWidget {
   var userindex;
   String name, email, secondname;
   edit(
+
+      // this.email,
+      {
+    Key? key,
+    required this.name,
+    required this.email,
+    required this.secondname,
     this.userindex,
-    this.name,
-    this.email,
-    this.secondname,
-  );
+  }) : super(key: key);
 
   @override
   State<edit> createState() => _editState();
 }
 
 class _editState extends State<edit> {
-  var name = '';
-  var email = '';
-  var secondname = '';
-  // var password = '';
+  @override
+  void initState() {
+    name = widget.name;
+    secondname = widget.secondname;
+    email = widget.email;
+    print(name);
+    super.initState();
+  }
+
+  String? name;
+  var email;
+  var secondname;
+  var password;
   final _firstname = TextEditingController();
   final _secondname = TextEditingController();
   final _email = TextEditingController();
@@ -35,15 +49,6 @@ class _editState extends State<edit> {
 
   var uploadImage;
   File? filepath;
-
-  @override
-  void initstate() {
-    _firstname.text = widget.name;
-    _secondname.text = widget.secondname;
-    _email.text = widget.email;
-
-    super.initState();
-  }
 
   Future _image() async {
     final pick = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -63,6 +68,9 @@ class _editState extends State<edit> {
   }
 
   Widget build(BuildContext context) {
+    _firstname.text = name!;
+    _secondname.text = secondname;
+    _email.text = email;
     return Scaffold(
         appBar: AppBar(title: const Text('Edit details')),
         body: Form(
@@ -90,6 +98,7 @@ class _editState extends State<edit> {
                 Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    keyboardType: TextInputType.name,
                     controller: _secondname,
                     autofocus: false,
                     onChanged: (value) => {},
@@ -107,6 +116,12 @@ class _editState extends State<edit> {
                 Container(
                   margin: const EdgeInsets.all(10),
                   child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      // initialValue: name,
+                      // inputFormatters: [
+                      //   FilteringTextInputFormatter.allow(RegExp(
+                      //       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+                      // ],
                       controller: _email,
                       autofocus: false,
                       onChanged: (value) => {},
@@ -133,7 +148,7 @@ class _editState extends State<edit> {
                                 email = _email.text;
                               });
                               updateuser(
-                                  name: name,
+                                  name: name!,
                                   secondname: secondname,
                                   email: email);
                               Navigator.pop(context);

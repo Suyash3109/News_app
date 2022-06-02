@@ -31,7 +31,7 @@ class _loginpageState extends State<loginpage> {
       autofocus: false,
       decoration: InputDecoration(
           hintText: "email",
-          prefixIcon: Icon(Icons.mail),
+          prefixIcon: const Icon(Icons.mail),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
       controller: emailcontroller,
       keyboardType: TextInputType.emailAddress,
@@ -59,7 +59,7 @@ class _loginpageState extends State<loginpage> {
     final passwordfield = TextFormField(
       decoration: InputDecoration(
           hintText: "Password",
-          prefixIcon: Icon(Icons.vpn_key),
+          prefixIcon: const Icon(Icons.vpn_key),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
       controller: passwordcontroller,
       //keyboardType: TextInputType.number,
@@ -88,7 +88,7 @@ class _loginpageState extends State<loginpage> {
       borderRadius: BorderRadius.circular(30),
       color: Colors.redAccent,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           // StreamBuilder(
@@ -111,10 +111,10 @@ class _loginpageState extends State<loginpage> {
 
           //   signIn(emailcontroller.text, passwordcontroller.text);
         },
-        child: Text(
+        child: const Text(
           "Login",
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -137,19 +137,12 @@ class _loginpageState extends State<loginpage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   emailfield,
-                  // TextFormField(
-                  //   decoration: InputDecoration(
-                  //     hintText: "email",
-                  //     border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(50)),
-                  //   ),
-                  // ),
-                  //Text("data"),
-                  SizedBox(
+
+                  const SizedBox(
                     height: 50,
                   ),
                   passwordfield,
@@ -162,7 +155,7 @@ class _loginpageState extends State<loginpage> {
                   //   ),
                   // ),
                   //Text("data"),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   loginbutton,
@@ -181,11 +174,11 @@ class _loginpageState extends State<loginpage> {
                   //     ElevatedButton(onPressed: () {}, child: Text("aa"))
                   //   ],
                   // ),
-                  Divider(),
+                  const Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account?"),
+                      const Text("Don't have an account?"),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -193,7 +186,7 @@ class _loginpageState extends State<loginpage> {
                               MaterialPageRoute(
                                   builder: (context) => regscr()));
                         },
-                        child: Text(
+                        child: const Text(
                           "SignUp",
                           style: TextStyle(
                             fontStyle: FontStyle.italic,
@@ -221,8 +214,9 @@ class _loginpageState extends State<loginpage> {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => {
                 Fluttertoast.showToast(msg: "login successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => checkuser()))
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const checkuser()),
+                    ((route) => false))
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);

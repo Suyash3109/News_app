@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/usermodel.dart';
+import 'package:flutter_application_1/userpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'home.dart';
@@ -33,7 +34,7 @@ class _regscrState extends State<regscr> {
     final namefield = TextFormField(
       decoration: InputDecoration(
           hintText: "First Name",
-          prefixIcon: Icon(Icons.person),
+          prefixIcon: const Icon(Icons.person),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
           )),
@@ -61,7 +62,7 @@ class _regscrState extends State<regscr> {
     final snamefield = TextFormField(
       decoration: InputDecoration(
         hintText: "Second Name",
-        prefixIcon: Icon(Icons.person),
+        prefixIcon: const Icon(Icons.person),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
         ),
@@ -89,7 +90,7 @@ class _regscrState extends State<regscr> {
     final emailfield = TextFormField(
       decoration: InputDecoration(
           hintText: "Email",
-          prefixIcon: Icon(Icons.email),
+          prefixIcon: const Icon(Icons.email),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(50))),
       controller: emailcontroller,
       validator: (value) {
@@ -115,7 +116,7 @@ class _regscrState extends State<regscr> {
     final passfield = TextFormField(
       decoration: InputDecoration(
           hintText: "Password",
-          prefixIcon: Icon(Icons.vpn_key),
+          prefixIcon: const Icon(Icons.vpn_key),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(50))),
       // controller: passwordcontroller,
       validator: (value) {
@@ -143,17 +144,17 @@ class _regscrState extends State<regscr> {
       borderRadius: BorderRadius.circular(30),
       color: Colors.redAccent,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           singup(emailcontroller.text, passwordcontroller.text);
 
           //   signIn(emailcontroller.text, passwordcontroller.text);
         },
-        child: Text(
+        child: const Text(
           "SignUp",
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -167,9 +168,9 @@ class _regscrState extends State<regscr> {
         title: const Text("hey there"),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             color: Colors.amber,
-            padding: EdgeInsets.fromLTRB(50, 15, 50, 15),
+            padding: const EdgeInsets.fromLTRB(50, 15, 50, 15),
             // minWidth: MediaQuery.of(context).size.width,
             onPressed: () {
               _signout();
@@ -186,23 +187,23 @@ class _regscrState extends State<regscr> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 90,
                 ),
                 namefield,
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 snamefield,
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 emailfield,
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 passfield,
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 signupbutton,
@@ -239,13 +240,15 @@ class _regscrState extends State<regscr> {
         .doc(user.uid)
         .set(Usermodel.toMap());
     Fluttertoast.showToast(msg: 'account created');
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => homescr()), (route) => false);
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        (route) => false);
   }
 
   Future _signout() async {
     await FirebaseAuth.instance.signOut();
-    return Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => loginpage()));
+    return Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const loginpage()));
   }
 }

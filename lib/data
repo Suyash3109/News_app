@@ -6,3 +6,22 @@ Column(
                       ],
                     )
                     
+
+                     Text(
+                    "${loggedInUSer.firstname} ${loggedInUSer.secondname}",
+
+
+
+
+
+                    onPressed: () 
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => edit(
+                                      user!.uid,
+                                      loggedInUSer.firstname.toString(),
+                                      loggedInUSer.secondname.toString(),
+                                      loggedInUSer.email.toString(),
+                                      //  loggedInUSer.firstname.toString(),
+                                    )))

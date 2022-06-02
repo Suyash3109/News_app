@@ -11,6 +11,7 @@ import 'package:flutter_application_1/image.dart';
 import 'package:flutter_application_1/loggedin.dart';
 import 'package:flutter_application_1/loggin.dart';
 import 'package:flutter_application_1/reg.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
