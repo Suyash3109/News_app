@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/drawer.dart';
 import 'package:flutter_application_1/loggin.dart';
 import 'package:flutter_application_1/reg.dart';
 import 'package:flutter_application_1/userpage.dart';
@@ -58,7 +59,7 @@ class _checkuserState extends State<checkuser> {
                       ));
                     } else {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => drawer(),
                       ));
                     }
                   } else {

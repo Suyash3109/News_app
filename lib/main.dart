@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/check.dart';
+import 'package:flutter_application_1/drawer.dart';
 import 'package:flutter_application_1/edit.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/image.dart';
@@ -70,7 +71,9 @@ class MyApp extends StatelessWidget {
       //         return loginpage();
       //       }
       //     }),
-      home: const checkuser(),
+      // home: const checkuser(),
+      home: checkuser(),
+      debugShowCheckedModeBanner: false,
     );
 
     // authorizeaccess(BuildContext context) {

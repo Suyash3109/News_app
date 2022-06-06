@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/check.dart';
+import 'package:flutter_application_1/drawer.dart';
 import 'package:flutter_application_1/image.dart';
 import 'package:flutter_application_1/loggin.dart';
 import 'package:flutter_application_1/usermodel.dart';
@@ -78,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     return Scaffold(
+      // drawer: drawer(),
       appBar: AppBar(
         actions: [
           PopupMenuButton(itemBuilder: (BuildContext context) {
