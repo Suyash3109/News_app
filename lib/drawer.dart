@@ -62,6 +62,9 @@ class _drawerState extends State<drawer> {
     });
   }
 
+  var myMenuItems = <String>[
+    'Edit',
+  ];
   @override
   Widget build(BuildContext context) {
     final logoutbutton = Material(
@@ -212,16 +215,34 @@ class _drawerState extends State<drawer> {
         ),
       ),
       appBar: AppBar(
+        actions: <Widget>[
+          PopupMenuButton(
+              icon: const Icon(Icons.filter_alt),
+              itemBuilder: (BuildContext context) {
+                return myMenuItems.map((String choice) {
+                  return PopupMenuItem<String>(
+                    child: Text(choice),
+                    value: choice,
+                  );
+                }).toList();
+              },
+              onSelected: (item) {
+                switch (item) {
+                  case 'Edit':
+                }
+              })
+        ],
         title: const Text(
           'Home Page',
           textAlign: TextAlign.start,
           style: TextStyle(color: Colors.white),
         ),
       ),
+
       // body: Icon(Icons.filter_alt_rounded),
 
       body: Obx(() => _controller.isload.value
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(
                 color: Colors.redAccent,
                 backgroundColor: Colors.black,
