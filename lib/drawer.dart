@@ -11,6 +11,7 @@ import 'package:flutter_application_1/check.dart';
 import 'package:flutter_application_1/usermodel.dart';
 import 'package:flutter_application_1/userpage.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -25,6 +26,8 @@ class drawer extends StatefulWidget {
 }
 
 class _drawerState extends State<drawer> {
+  DateTime selectedDate = DateTime.now();
+
   var title = ['Title Here', 'TestTitle'];
   var desc = ['Description her', 'Test Description'];
   var content = ['Content Here', 'Here Content'];
@@ -62,9 +65,27 @@ class _drawerState extends State<drawer> {
     });
   }
 
-  var myMenuItems = <String>[
-    'Edit',
-  ];
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
+  // var myMenuItems = <String>[
+  //   '2022-06-01',
+  //   '2022-06-02',
+  //   '2022-06-03',
+  //   '2022-06-04',
+  //   '2022-06-05',
+  //   '2022-06-06',
+  //   '2022-06-07',
+  // ];
   @override
   Widget build(BuildContext context) {
     final logoutbutton = Material(
@@ -216,21 +237,27 @@ class _drawerState extends State<drawer> {
       ),
       appBar: AppBar(
         actions: <Widget>[
-          PopupMenuButton(
-              icon: const Icon(Icons.filter_alt),
-              itemBuilder: (BuildContext context) {
-                return myMenuItems.map((String choice) {
-                  return PopupMenuItem<String>(
-                    child: Text(choice),
-                    value: choice,
-                  );
-                }).toList();
-              },
-              onSelected: (item) {
-                switch (item) {
-                  case 'Edit':
-                }
-              })
+          IconButton(
+              onPressed: () => _selectDate(context),
+              icon: Icon(Icons.calendar_month_outlined))
+
+          // PopupMenuButton(
+          //     icon: const Icon(Icons.filter_alt),
+          //     itemBuilder: (BuildContext context) {
+          //       // return myMenuItems.map((String choice) {
+          //       //   return PopupMenuItem<String>(
+          //       //     child: Text(choice),
+          //       //     value: choice,
+          //       //   );
+          //       // }).toList();
+
+          //     },
+          //     onSelected: (item) {
+          //       switch (item) {
+          //         case 'Edit':
+          //       }
+          //     }
+          //     )
         ],
         title: const Text(
           'Home Page',
