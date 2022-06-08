@@ -11,7 +11,7 @@ import 'package:flutter_application_1/check.dart';
 import 'package:flutter_application_1/usermodel.dart';
 import 'package:flutter_application_1/userpage.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart' as datepicker;
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -65,17 +65,38 @@ class _drawerState extends State<drawer> {
     });
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+  Future<void> _show(BuildContext context) async {
+    final DateTimeRange? result = await showDateRangePicker(
         context: context,
-        initialDate: selectedDate,
+        // initialDateRange: DateTimeRange(,
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate)
+    if (result != null && result != showDateRangePicker) {
       setState(() {
-        selectedDate = picked;
+        _selectedDateRange = result;
       });
+    }
+    print("_showFunction Executed");
   }
+
+  DateTimeRange? _selectedDateRange;
+  // Future<void> _show(BuildContext context) async {
+  //   final DateTimeRange? result = await showDateRangePicker(
+  //     context: context,
+  //     firstDate: DateTime(2022, 1, 1),
+  //     lastDate: DateTime(2030, 12, 31),
+  //     currentDate: DateTime.now(),
+  //     saveText: 'Done',
+  //   );
+
+  //   if (result != null) {
+  //     // Rebuild the UI
+  //     print(result.start.toString());
+  //     setState(() {
+  //       _selectedDateRange = result;
+  //     });
+  //   }
+  // }
 
   // var myMenuItems = <String>[
   //   '2022-06-01',
@@ -236,10 +257,42 @@ class _drawerState extends State<drawer> {
         ),
       ),
       appBar: AppBar(
-        actions: <Widget>[
+        actions: [
           IconButton(
-              onPressed: () => _selectDate(context),
-              icon: Icon(Icons.calendar_month_outlined))
+              onPressed: () {
+                _show(context);
+              },
+              icon: Icon(Icons.calendar_month_outlined)),
+          // _selectedDateRange == null
+          //     ? const Center(
+          //         child: Text(' '),
+          //       )
+          //     :
+          Padding(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Text(
+                //   'start date: ${_selectedDateRange?.start.toString().split(' ')[0]}',
+                //   style: const TextStyle(fontSize: 24, color: Colors.redAccent),
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // Text(
+                //   'End date: ${_selectedDateRange?.end.toString().split(' ')[0]}',
+                //   style: const TextStyle(fontSize: 24, color: Colors.blue),
+                // ),
+              ],
+            ),
+          )
+          // Row(
+          //   children: <Widget>[
+          //     Text("${selectedDate.toLocal()}".split(' ')[0]),
+          //     IconButton(
+          //         onPressed: () => _selectDate(context),
+          //         icon: Icon(Icons.calendar_month_outlined))
 
           // PopupMenuButton(
           //     icon: const Icon(Icons.filter_alt),
@@ -258,6 +311,8 @@ class _drawerState extends State<drawer> {
           //       }
           //     }
           //     )
+          //   ],
+          // ),
         ],
         title: const Text(
           'Home Page',
@@ -278,6 +333,9 @@ class _drawerState extends State<drawer> {
           : ListView.builder(
               itemCount: _controller.response[0].articles!.length,
               itemBuilder: (context, index) {
+                // SizedBox(
+                //   height: 80,
+                // );
                 return NewsTile(
                   _controller.response[0].articles![index].title.toString(),
                   _controller.response[0].articles![index].description

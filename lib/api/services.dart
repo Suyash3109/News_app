@@ -10,7 +10,7 @@ class services {
     String formattedDate = formatter.format(now);
     // print(formattedDate);
     final response = await http.get(Uri.parse(
-        'https://newsapi.org/v2/everything?q=indian politics&from=$formattedDate&to=$formattedDate&sortBy=popularity&apiKey=81f2268c6569466ea5cee2d9f401cce8'));
+        'https://newsapi.org/v2/everything?q=indian&from=$formattedDate&to=$formattedDate&sortBy=popularity&apiKey=81f2268c6569466ea5cee2d9f401cce8'));
     // print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
