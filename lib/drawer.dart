@@ -65,21 +65,21 @@ class _drawerState extends State<drawer> {
     });
   }
 
-  Future<void> _show(BuildContext context) async {
-    final DateTimeRange? result = await showDateRangePicker(
-        context: context,
-        // initialDateRange: DateTimeRange(,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-    if (result != null && result != showDateRangePicker) {
-      setState(() {
-        _selectedDateRange = result;
-      });
-    }
-    print("_showFunction Executed");
-  }
+  // Future<void> _show(BuildContext context) async {
+  //   final DateTimeRange? result = await showDateRangePicker(
+  //       context: context,
+  //       // initialDateRange: DateTimeRange(,
+  //       firstDate: DateTime(2015, 8),
+  //       lastDate: DateTime(2101));
+  //   if (result != null && result != showDateRangePicker) {
+  //     setState(() {
+  //       _selectedDateRange = result;
+  //     });
+  //   }
+  //   print("_showFunction Executed");
+  // }
 
-  DateTimeRange? _selectedDateRange;
+  // DateTimeRange? _selectedDateRange;
   // Future<void> _show(BuildContext context) async {
   //   final DateTimeRange? result = await showDateRangePicker(
   //     context: context,
@@ -260,7 +260,7 @@ class _drawerState extends State<drawer> {
         actions: [
           IconButton(
               onPressed: () {
-                _show(context);
+                _controller.show(context);
               },
               icon: Icon(Icons.calendar_month_outlined)),
           // _selectedDateRange == null

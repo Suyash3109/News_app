@@ -4,13 +4,13 @@ import 'package:intl/intl.dart';
 import 'model.dart';
 
 class services {
-  static fetchAlbum() async {
-    var now = DateTime.now();
-    var formatter = DateFormat('yyyy-MM-dd');
-    String formattedDate = formatter.format(now);
+  static fetchAlbum(var startformattedDate, endformattedDate) async {
+    // var now = DateTime.now();
+    // var formatter = DateFormat('dd-mm-yyyy');
+    // String formattedDate = formatter.format(now);
     // print(formattedDate);
     final response = await http.get(Uri.parse(
-        'https://newsapi.org/v2/everything?q=indian&from=$formattedDate&to=$formattedDate&sortBy=popularity&apiKey=81f2268c6569466ea5cee2d9f401cce8'));
+        'https://newsapi.org/v2/everything?q=india&from=$startformattedDate&to$endformattedDate&sortBy=publishedAt&apiKey=81f2268c6569466ea5cee2d9f401cce8'));
     // print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
