@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/check.dart';
 import 'package:flutter_application_1/usermodel.dart';
 import 'package:flutter_application_1/userpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -165,7 +166,7 @@ class _regscrState extends State<regscr> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("hey there"),
+        title: const Text("Please Register"),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -242,7 +243,7 @@ class _regscrState extends State<regscr> {
     Fluttertoast.showToast(msg: 'account created');
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const checkuser()),
         (route) => false);
   }
 
